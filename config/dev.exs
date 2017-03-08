@@ -11,7 +11,7 @@ config :hofi_phoenix, HofiPhoenix.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin"]]
+  watchers: [npm: ["run", "watch"]]
 
 # Watch static and templates for browser reloading.
 config :hofi_phoenix, HofiPhoenix.Endpoint,
@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :hofi_phoenix, HofiPhoenix.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "jukkapuranen",
+  password: "password",
   database: "hofi_phoenix_dev",
   hostname: "localhost",
   pool_size: 10
