@@ -1,6 +1,8 @@
 defmodule HofiPhoenix.Router do
   use HofiPhoenix.Web, :router
 
+
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -10,17 +12,23 @@ defmodule HofiPhoenix.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["html","json"]
+
   end
 
   scope "/", HofiPhoenix do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HofiPhoenix do
-  #   pipe_through :api
-  # end
+   scope "/api" do
+     pipe_through :api
+     forward "/", Absinthe.Plug, schema: HofiPhoenix.Schema 
+     forward "/graphiql", Absinthe.Plug.GraphiQL, schema: HofiPhoenix.Schema 
+
+   end
 end
